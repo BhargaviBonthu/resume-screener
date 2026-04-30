@@ -1,29 +1,31 @@
-# AI Resume Screener (Semantic Ranking System)
+# AI Resume Ranking System
 
-This project demonstrates a semantic retrieval system that ranks resumes against a job description using embedding-based similarity.
+## Problem
+Traditional keyword-based resume screening fails to capture semantic relevance and produces weak ranking.
 
-## 🚀 Features
-- Semantic similarity using Sentence Transformers
-- Multi-resume ranking system
-- Context-aware matching (not keyword-based)
+## Solution
+Built a semantic retrieval pipeline that ranks resumes using:
+- chunk-based retrieval
+- embedding similarity (Sentence Transformers)
+- weighted keyword boosting
+- penalty filtering for generic content
 
-## 🧠 How it works
-1. Convert resumes and job description into embeddings
-2. Compute cosine similarity
-3. Rank candidates based on relevance
-
-## 📊 Example Output
-0.7264 → ML + NLP profile  
-0.5459 → Data science profile  
-0.1706 → Unrelated frontend profile  
-
-## 🛠 Tech Stack
-- Python
-- Sentence Transformers
-- NLP embeddings
-
-## 📌 Future Improvements
+## Features
 - PDF resume parsing
-- Top-K filtering
-- Web UI (Streamlit)
-- Integration with vector databases
+- Hybrid scoring system
+- Top-K ranking
+- Failure analysis & confidence detection
+- Explainability via top matching chunks
+
+## Example Output
+Score gap between candidates:
+0.246 vs 0.111 → strong separation
+
+## Key Learnings
+- Averaging scores reduces ranking quality
+- Chunking improves retrieval signal
+- Scoring design impacts performance more than model choice
+
+## Limitations
+- No structured skill extraction
+- Limited handling of implicit skills
