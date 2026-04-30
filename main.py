@@ -1,6 +1,8 @@
 from sentence_transformers import SentenceTransformer, util
 
+print("Loading model...")
 model = SentenceTransformer('all-MiniLM-L6-v2')
+print("Model loaded!")
 
 def match_score(resume, jd):
     emb1 = model.encode(resume, convert_to_tensor=True)
@@ -17,6 +19,8 @@ def rank_resumes(resumes, jd):
     return sorted(scores, key=lambda x: x[1], reverse=True)
 
 if __name__ == "__main__":
+    print("\nRunning Resume Ranking System...\n")
+
     jd = "Looking for Python ML engineer with NLP experience"
 
     resumes = [
@@ -27,6 +31,12 @@ if __name__ == "__main__":
 
     ranked = rank_resumes(resumes, jd)
 
-    print("\nRanked Candidates:\n")
+    print("All Ranked Candidates:\n")
     for r, s in ranked:
+        print(f"{s:.4f} → {r}")
+
+    # Top-K selection
+    top_k = 2
+    print("\nTop Candidates:\n")
+    for r, s in ranked[:top_k]:
         print(f"{s:.4f} → {r}")
